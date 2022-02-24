@@ -1,13 +1,8 @@
 package com.educandoweb.cursomc;
 
-import com.educandoweb.cursomc.domain.Category;
-import com.educandoweb.cursomc.domain.City;
-import com.educandoweb.cursomc.domain.Product;
-import com.educandoweb.cursomc.domain.State;
-import com.educandoweb.cursomc.repositories.CategoryRepository;
-import com.educandoweb.cursomc.repositories.CityRepository;
-import com.educandoweb.cursomc.repositories.ProductRepository;
-import com.educandoweb.cursomc.repositories.StateRepository;
+import com.educandoweb.cursomc.domain.*;
+import com.educandoweb.cursomc.domain.enums.ClientType;
+import com.educandoweb.cursomc.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -29,6 +24,12 @@ public class CursomcApplication implements CommandLineRunner {
 
 	@Autowired
 	private CityRepository cityRepository;
+
+	@Autowired
+	private ClientRepository clientRepository;
+
+	@Autowired
+	private AddressRepository addressRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -66,5 +67,16 @@ public class CursomcApplication implements CommandLineRunner {
 		stateRepository.saveAll(Arrays.asList(st1, st2));
 		cityRepository.saveAll(Arrays.asList(c1, c2, c3));
 
+		Client cli1 = new Client(null, "Maria Silva", "maria@gmail.com", "36378912377", ClientType.NATURALPERSON);
+
+		cli1.getPhoneNumbers().addAll(Arrays.asList("27363323", "93838393"));
+
+		Address ad1 = new Address(null, "Rua Flores", "300", "Apto 303", "Jardim", "38220834", cli1, c1);
+		Address ad2 = new Address(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);
+
+		cli1.getAddresses().addAll(Arrays.asList(ad1, ad2));
+
+		clientRepository.saveAll(Arrays.asList(cli1));
+		addressRepository.saveAll(Arrays.asList(ad1, ad2));
 	}
 }
