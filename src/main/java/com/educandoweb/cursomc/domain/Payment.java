@@ -1,6 +1,7 @@
 package com.educandoweb.cursomc.domain;
 
 import com.educandoweb.cursomc.domain.enums.PaymentStatus;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,6 +15,7 @@ public abstract class Payment implements Serializable {
     private Integer id;
     private Integer status;
 
+    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "purchase_id")
     @MapsId
