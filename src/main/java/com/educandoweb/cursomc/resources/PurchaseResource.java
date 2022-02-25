@@ -3,7 +3,6 @@ package com.educandoweb.cursomc.resources;
 import com.educandoweb.cursomc.domain.Purchase;
 import com.educandoweb.cursomc.services.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +17,7 @@ public class PurchaseResource {
     private PurchaseService service;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> find(@PathVariable Integer id){
+    public ResponseEntity<Purchase> find(@PathVariable Integer id){
         Purchase obj = service.search(id);
         return ResponseEntity.ok().body(obj);
     }
