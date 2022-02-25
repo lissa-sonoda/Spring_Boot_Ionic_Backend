@@ -1,6 +1,7 @@
 package com.educandoweb.cursomc.services;
 
 import com.educandoweb.cursomc.domain.Category;
+import com.educandoweb.cursomc.dto.CategoryDTO;
 import com.educandoweb.cursomc.repositories.CategoryRepository;
 import com.educandoweb.cursomc.services.exceptions.DataIntegrityException;
 import com.educandoweb.cursomc.services.exceptions.ObjectNotFoundException;
@@ -53,5 +54,9 @@ public class CategoryService {
     public Page<Category> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
         return repo.findAll(pageRequest);
+    }
+
+    public Category fromDTO(CategoryDTO objDto){
+        return new Category(objDto.getId(), objDto.getName());
     }
 }
