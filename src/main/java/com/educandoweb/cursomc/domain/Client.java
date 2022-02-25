@@ -1,8 +1,7 @@
 package com.educandoweb.cursomc.domain;
 
 import com.educandoweb.cursomc.domain.enums.ClientType;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,7 +22,6 @@ public class Client implements Serializable {
     private String ssnOrEin;
     private Integer type;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "client")
     private List<Address> addresses = new ArrayList<>();
 
@@ -31,7 +29,7 @@ public class Client implements Serializable {
     @CollectionTable(name = "phone_number")
     private Set<String> phoneNumbers = new HashSet<>();
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<Purchase> purchases = new ArrayList<>();
 
