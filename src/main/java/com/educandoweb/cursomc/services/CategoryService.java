@@ -2,8 +2,10 @@ package com.educandoweb.cursomc.services;
 
 import com.educandoweb.cursomc.domain.Category;
 import com.educandoweb.cursomc.repositories.CategoryRepository;
+import com.educandoweb.cursomc.services.exceptions.DataIntegrityException;
 import com.educandoweb.cursomc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -17,7 +19,7 @@ public class CategoryService {
     public Category search(Integer id) {
         Optional<Category> obj = repo.findById(id);
         return    obj.orElseThrow(() -> new ObjectNotFoundException(
-                "Objeto não encontrado! Id: " + id + ", Tipo: " + Category.class.getName()));
+                "Object not found! Id: " + id + ", Type: " + Category.class.getName()));
     }
 
     public Category insert(Category obj){
@@ -28,5 +30,16 @@ public class CategoryService {
     public Category update(Category obj){
         search(obj.getId());
         return repo.save(obj);
+    }
+
+    public void delete(Integer id){
+        search(id);
+        try{
+            repo.deleteById(id);
+        }
+        catch (DataIntegrityViolationException e){
+            throw new DataIntegrityException("It's not possible to delete a category that has products!");
+        }
+
     }
 }
