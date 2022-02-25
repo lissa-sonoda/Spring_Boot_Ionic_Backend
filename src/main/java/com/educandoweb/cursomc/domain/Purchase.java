@@ -3,6 +3,8 @@ package com.educandoweb.cursomc.domain;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Purchase implements Serializable {
@@ -23,6 +25,9 @@ public class Purchase implements Serializable {
     @ManyToOne
     @JoinColumn(name = "delivery_address_id")
     private Address deliveryAddress;
+
+    @OneToMany(mappedBy = "id.purchase")
+    private Set<PurchaseItem> items = new HashSet<>();
 
     public Purchase(){
     }
@@ -72,6 +77,14 @@ public class Purchase implements Serializable {
 
     public void setDeliveryAddress(Address deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
+    }
+
+    public Set<PurchaseItem> getItems() {
+        return items;
+    }
+
+    public void setItems(Set<PurchaseItem> items) {
+        this.items = items;
     }
 
     @Override
