@@ -2,12 +2,14 @@ package com.educandoweb.cursomc;
 
 import com.educandoweb.cursomc.domain.*;
 import com.educandoweb.cursomc.domain.enums.ClientType;
+import com.educandoweb.cursomc.domain.enums.PaymentStatus;
 import com.educandoweb.cursomc.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 @SpringBootApplication
@@ -30,6 +32,12 @@ public class CursomcApplication implements CommandLineRunner {
 
 	@Autowired
 	private AddressRepository addressRepository;
+
+	@Autowired
+	private PurchaseRepository purchaseRepository;
+
+	@Autowired
+	private PaymentRepository paymentRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -78,5 +86,22 @@ public class CursomcApplication implements CommandLineRunner {
 
 		clientRepository.saveAll(Arrays.asList(cli1));
 		addressRepository.saveAll(Arrays.asList(ad1, ad2));
+
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+		Purchase pur1 = new Purchase(null, sdf.parse("30/09/2017 10:32"), cli1, ad1);
+		Purchase pur2 = new Purchase(null, sdf.parse("10/10/2017 19:35"), cli1, ad2);
+
+		Payment pay1 = new PaymentWithCard(null, PaymentStatus.COMPLETED, pur1, 6);
+		pur1.setPayment(pay1);
+
+		Payment pay2 = new PaymentWithBill(null, PaymentStatus.PENDING, pur2, sdf.parse("20/10/2017 00:00") , null);
+		pur2.setPayment(pay2);
+
+		cli1.getPurchases().addAll(Arrays.asList(pur1, pur2));
+
+		purchaseRepository.saveAll(Arrays.asList(pur1, pur2));
+		paymentRepository.saveAll(Arrays.asList(pay1, pay2));
+
 	}
 }
