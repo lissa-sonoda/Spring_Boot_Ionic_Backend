@@ -32,7 +32,7 @@ public class ClientService {
     public Client search(Integer id){
         Optional<Client> obj = repo.findById(id);
         return    obj.orElseThrow(() -> new ObjectNotFoundException(
-                "Objeto não encontrado! Id: " + id + ", Tipo: " + Client.class.getName()));
+                "Object not found! Id: " + id + ", Type: " + Client.class.getName()));
     }
 
     public Client insert(Client obj){

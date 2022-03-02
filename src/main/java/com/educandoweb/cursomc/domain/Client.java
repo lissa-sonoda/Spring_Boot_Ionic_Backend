@@ -22,7 +22,7 @@ public class Client implements Serializable {
     private String ssnOrEin;
     private Integer type;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<Address> addresses = new ArrayList<>();
 
     @ElementCollection

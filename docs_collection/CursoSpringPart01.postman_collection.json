@@ -471,6 +471,25 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Delete Client 2",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/clients/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clients",
+						"2"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
