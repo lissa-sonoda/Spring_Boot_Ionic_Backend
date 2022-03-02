@@ -1,6 +1,5 @@
 package com.educandoweb.cursomc.services;
 
-import com.educandoweb.cursomc.domain.Client;
 import com.educandoweb.cursomc.domain.Purchase;
 import com.educandoweb.cursomc.repositories.PurchaseRepository;
 import com.educandoweb.cursomc.services.exceptions.ObjectNotFoundException;

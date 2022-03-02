@@ -1,7 +1,6 @@
 package com.educandoweb.cursomc.services;
 
 import com.educandoweb.cursomc.domain.Client;
-import com.educandoweb.cursomc.domain.Client;
 import com.educandoweb.cursomc.dto.ClientDTO;
 import com.educandoweb.cursomc.repositories.ClientRepository;
 import com.educandoweb.cursomc.services.exceptions.DataIntegrityException;
