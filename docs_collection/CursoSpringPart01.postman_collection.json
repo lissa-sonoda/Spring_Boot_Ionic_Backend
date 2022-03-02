@@ -399,6 +399,37 @@
 			"response": []
 		},
 		{
+			"name": "Get Client 3",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/clients/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clients",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Post Client 2",
 			"request": {
 				"method": "POST",
@@ -406,6 +437,87 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"name\": \"João da Silva\",\r\n    \"email\": \"joao@gmail.com\",\r\n    \"ssnOrEin\": \"03469218641\",\r\n    \"type\": \"1\",\r\n    \"streetAddress\": \"Rua das Acácias\",\r\n    \"number\": \"345\",\r\n    \"addressLine\": \"Apto 302\",\r\n    \"postalCode\": \"38466837\",\r\n    \"phoneNumber1\": \"996611122\",\r\n    \"phoneNumber2\": \"32364455\",\r\n    \"cityId\": \"2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/clients",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Client 2 SSN Invalid",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"João da Silva\",\r\n    \"email\": \"joao@gmail.com\",\r\n    \"ssnOrEin\": \"0346921864199\",\r\n    \"type\": \"1\",\r\n    \"streetAddress\": \"Rua das Acácias\",\r\n    \"number\": \"345\",\r\n    \"addressLine\": \"Apto 302\",\r\n    \"postalCode\": \"38466837\",\r\n    \"phoneNumber1\": \"996611122\",\r\n    \"phoneNumber2\": \"32364455\",\r\n    \"cityId\": \"2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/clients",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Client 3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"José da Silva\",\r\n    \"email\": \"jose@gmail.com\",\r\n    \"ssnOrEin\": \"20706495000186\",\r\n    \"type\": \"2\",\r\n    \"streetAddress\": \"Rua das Acácias\",\r\n    \"number\": \"447\",\r\n    \"addressLine\": \"Apto 302\",\r\n    \"postalCode\": \"38466837\",\r\n    \"phoneNumber1\": \"996611122\",\r\n    \"phoneNumber2\": \"32364455\",\r\n    \"cityId\": \"2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/clients",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Client 3 EIN Invalid",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"José da Silva\",\r\n    \"email\": \"jose@gmail.com\",\r\n    \"ssnOrEin\": \"2070649500018688\",\r\n    \"type\": \"2\",\r\n    \"streetAddress\": \"Rua das Acácias\",\r\n    \"number\": \"447\",\r\n    \"addressLine\": \"Apto 302\",\r\n    \"postalCode\": \"38466837\",\r\n    \"phoneNumber1\": \"996611122\",\r\n    \"phoneNumber2\": \"32364455\",\r\n    \"cityId\": \"2\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

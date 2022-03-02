@@ -1,23 +1,47 @@
 package com.educandoweb.cursomc.dto;
 
+import com.educandoweb.cursomc.services.validation.ClientInsert;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
+@ClientInsert
 public class ClientNewDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @NotEmpty(message = "The name is required!")
+    @Length(min = 5, max = 120, message = "The name must contain between 5 and 120 characters")
     private String name;
+
+    @NotEmpty(message = "The e-mail is required!")
+    @Email(message = "Invalid E-mail!")
     private String email;
+
+    @NotEmpty(message = "SSN/EIN is required!")
     private String ssnOrEin;
+
     private Integer type;
 
+    @NotEmpty(message = "An address is required!")
     private String streetAddress;
+
+    @NotEmpty(message = "The number is required!")
     private String number;
+
     private String addressLine;
+
     private String region;
+
+    @NotEmpty(message = "Postal code is required!")
     private String postalCode;
 
+    @NotEmpty(message = "At least one phone number is required!")
     private String phoneNumber1;
+
     private String phoneNumber2;
+
     private String phoneNumber3;
 
     private Integer cityId;
