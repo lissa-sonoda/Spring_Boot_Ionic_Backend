@@ -34,6 +34,11 @@ public class ClientInsertValidator implements ConstraintValidator<ClientInsert, 
             list.add(new FieldMessage("ssnOrEin", "Invalid EIN"));
         }
 
+        Client aux = repo.findByEmail(objDto.getEmail());
+        if (aux != null) {
+            list.add(new FieldMessage("email", "E-mail already exists!"));
+        }
+        
         for (FieldMessage e : list) {
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(e.getMessage())

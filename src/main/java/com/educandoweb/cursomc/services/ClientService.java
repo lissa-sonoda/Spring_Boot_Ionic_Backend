@@ -16,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +36,7 @@ public class ClientService {
                 "Object not found! Id: " + id + ", Type: " + Client.class.getName()));
     }
 
+    @Transactional
     public Client insert(Client obj){
         obj.setId(null);
         obj = repo.save(obj);
