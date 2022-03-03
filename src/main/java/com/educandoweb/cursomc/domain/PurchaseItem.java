@@ -29,6 +29,10 @@ public class PurchaseItem implements Serializable {
         this.price = price;
     }
 
+    public double getSubtotal(){
+        return (price - discount) * quantity;
+    }
+
     @JsonIgnore
     public Purchase getPurchase(){
         return id.getPurchase();

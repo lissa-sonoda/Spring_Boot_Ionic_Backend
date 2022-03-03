@@ -43,6 +43,14 @@ public class Purchase implements Serializable {
         this.deliveryAddress = deliveryAddress;
     }
 
+    public double getTotal(){
+        double sum = 0.0;
+        for(PurchaseItem ip : items){
+            sum += ip.getSubtotal();
+        }
+        return sum;
+    }
+
     public Integer getId() {
         return id;
     }
