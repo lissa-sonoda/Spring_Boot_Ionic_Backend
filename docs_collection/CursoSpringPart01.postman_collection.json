@@ -687,6 +687,52 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Post Purchase 3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"client\" : {\r\n        \"id\" : 1\r\n        },\r\n    \"deliveryAddress\" : {\r\n        \"id\" : 1\r\n        },\r\n    \"payment\" : {\r\n        \"installments\" : 10,\r\n        \"@type\": \"paymentWithCard\" \r\n    },\r\n    \"items\" : [ \r\n        {\r\n        \"quantity\" : 2,\r\n        \"product\" : {\r\n            \"id\" : 3\r\n            } \r\n        },\r\n        {\r\n        \"quantity\" : 1,\r\n        \"product\" : {\r\n            \"id\" : 1\r\n            } \r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/purchases",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"purchases"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Purchase 3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/purchases/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"purchases",
+						"3"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
