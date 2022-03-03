@@ -658,6 +658,35 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get Products - search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/products/?name=er&categories=1,5",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "er"
+						},
+						{
+							"key": "categories",
+							"value": "1,5"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
