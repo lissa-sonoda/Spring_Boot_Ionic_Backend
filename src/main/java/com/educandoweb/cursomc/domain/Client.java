@@ -1,6 +1,7 @@
 package com.educandoweb.cursomc.domain;
 
 import com.educandoweb.cursomc.domain.enums.ClientType;
+import com.educandoweb.cursomc.domain.enums.Profile;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 public class Client implements Serializable {
@@ -34,11 +36,16 @@ public class Client implements Serializable {
     @CollectionTable(name = "phone_number")
     private Set<String> phoneNumbers = new HashSet<>();
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "profiles")
+    private Set<Integer> profiles = new HashSet<>();
+
     @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<Purchase> purchases = new ArrayList<>();
 
     public Client(){
+        addProfile(Profile.CLIENT);
     }
 
     public Client(Integer id, String name, String email, String ssnOrEin, ClientType type, String password) {
@@ -48,6 +55,7 @@ public class Client implements Serializable {
         this.ssnOrEin = ssnOrEin;
         this.type = (type == null) ? null : type.getCod();
         this.password = password;
+        addProfile(Profile.CLIENT);
     }
 
     public Integer getId() {
@@ -96,6 +104,14 @@ public class Client implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Profile> getProfiles() {
+        return profiles.stream().map(x -> Profile.toEnum(x)).collect(Collectors.toSet());
+    }
+
+    public void addProfile(Profile profile) {
+        profiles.add(profile.getCod());
     }
 
     public List<Address> getAddresses() {

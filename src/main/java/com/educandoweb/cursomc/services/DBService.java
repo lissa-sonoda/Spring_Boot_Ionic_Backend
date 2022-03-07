@@ -3,6 +3,7 @@ package com.educandoweb.cursomc.services;
 import com.educandoweb.cursomc.domain.*;
 import com.educandoweb.cursomc.domain.enums.ClientType;
 import com.educandoweb.cursomc.domain.enums.PaymentStatus;
+import com.educandoweb.cursomc.domain.enums.Profile;
 import com.educandoweb.cursomc.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -105,16 +106,21 @@ public class DBService {
         cityRepository.saveAll(Arrays.asList(c1, c2, c3));
 
         Client cli1 = new Client(null, "Maria Silva", "helen.lissa@gmail.com", "36378912377", ClientType.NATURALPERSON, pe.encode("12345678"));
-
         cli1.getPhoneNumbers().addAll(Arrays.asList("27363323", "93838393"));
+
+        Client cli2 = new Client(null, "Ana Costa", "helensonoda.1100@aluno.saojudas.br", "31628382740", ClientType.NATURALPERSON, pe.encode("12345678"));
+        cli2.getPhoneNumbers().addAll(Arrays.asList("27363324", "93838394"));
+        cli2.addProfile(Profile.ADMIN);
 
         Address ad1 = new Address(null, "Rua Flores", "300", "Apto 303", "Jardim", "38220834", cli1, c1);
         Address ad2 = new Address(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);
+        Address ad3 = new Address(null, "Avenida Floriano", "2106", null, "Centro", "28177012", cli2, c2);
 
         cli1.getAddresses().addAll(Arrays.asList(ad1, ad2));
+        cli2.getAddresses().addAll(Arrays.asList(ad3));
 
-        clientRepository.saveAll(Arrays.asList(cli1));
-        addressRepository.saveAll(Arrays.asList(ad1, ad2));
+        clientRepository.saveAll(Arrays.asList(cli1, cli2));
+        addressRepository.saveAll(Arrays.asList(ad1, ad2, ad3));
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
