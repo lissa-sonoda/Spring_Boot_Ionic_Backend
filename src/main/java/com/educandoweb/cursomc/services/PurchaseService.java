@@ -36,6 +36,9 @@ public class PurchaseService {
     @Autowired
     private ClientService clientService;
 
+    @Autowired
+    private EmailService emailService;
+
     public Purchase search(Integer id){
         Optional<Purchase> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
@@ -63,7 +66,8 @@ public class PurchaseService {
             ip.setPurchase(obj);
         }
         purchaseItemRepository.saveAll(obj.getItems());
-        System.out.println(obj);
+        //System.out.println(obj);
+        emailService.sendOrderConfirmationEmail(obj);
         return obj;
     }
 }
