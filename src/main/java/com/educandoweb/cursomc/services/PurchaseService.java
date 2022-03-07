@@ -10,6 +10,7 @@ import com.educandoweb.cursomc.repositories.PurchaseRepository;
 import com.educandoweb.cursomc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.Optional;
@@ -42,6 +43,7 @@ public class PurchaseService {
         ));
     }
 
+    @Transactional
     public Purchase insert(Purchase obj){
         obj.setId(null);
         obj.setInstant(new Date());
