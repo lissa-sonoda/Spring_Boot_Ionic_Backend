@@ -4,8 +4,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 @Entity
@@ -112,5 +115,27 @@ public class Purchase implements Serializable {
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Purchase Number: ");
+        sb.append(getId());
+        sb.append(", Instant: ");
+        sb.append(sdf.format(getInstant()));
+        sb.append(", Client: ");
+        sb.append(getClient().getName());
+        sb.append(", Payment Status: ");
+        sb.append(getPayment().getStatus().getDescription());
+        sb.append("\nDetalhes:\n");
+        for (PurchaseItem ip: getItems()){
+            sb.append(ip.toString());
+        }
+        sb.append("Total: ");
+        sb.append(nf.format(getTotal()));
+        return sb.toString();
     }
 }

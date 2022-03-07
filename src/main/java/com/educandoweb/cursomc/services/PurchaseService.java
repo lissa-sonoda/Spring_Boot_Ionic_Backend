@@ -32,6 +32,9 @@ public class PurchaseService {
     @Autowired
     private PurchaseItemRepository purchaseItemRepository;
 
+    @Autowired
+    private ClientService clientService;
+
     public Purchase search(Integer id){
         Optional<Purchase> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
@@ -42,6 +45,7 @@ public class PurchaseService {
     public Purchase insert(Purchase obj){
         obj.setId(null);
         obj.setInstant(new Date());
+        obj.setClient(clientService.search(obj.getClient().getId()));
         obj.getPayment().setStatus((PaymentStatus.PENDING));
         obj.getPayment().setPurchase(obj);
         if(obj.getPayment() instanceof PaymentWithBill){
@@ -57,6 +61,7 @@ public class PurchaseService {
             ip.setPurchase(obj);
         }
         purchaseItemRepository.saveAll(obj.getItems());
+        System.out.println(obj);
         return obj;
     }
 }
