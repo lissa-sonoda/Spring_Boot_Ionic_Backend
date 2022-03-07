@@ -1,6 +1,8 @@
 package com.educandoweb.cursomc.config;
 
 import com.educandoweb.cursomc.services.DBService;
+import com.educandoweb.cursomc.services.EmailService;
+import com.educandoweb.cursomc.services.SmtpEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -27,5 +29,10 @@ public class DevConfig {
         }
         dbService.instantiateTestDatabase();
         return true;
+    }
+
+    @Bean
+    public EmailService emailService(){
+        return new SmtpEmailService();
     }
 }
