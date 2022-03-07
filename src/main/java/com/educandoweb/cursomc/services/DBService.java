@@ -5,6 +5,7 @@ import com.educandoweb.cursomc.domain.enums.ClientType;
 import com.educandoweb.cursomc.domain.enums.PaymentStatus;
 import com.educandoweb.cursomc.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -13,6 +14,9 @@ import java.util.Arrays;
 
 @Service
 public class DBService {
+
+    @Autowired
+    private BCryptPasswordEncoder pe;
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -100,7 +104,7 @@ public class DBService {
         stateRepository.saveAll(Arrays.asList(st1, st2));
         cityRepository.saveAll(Arrays.asList(c1, c2, c3));
 
-        Client cli1 = new Client(null, "Maria Silva", "helen.lissa@gmail.com", "36378912377", ClientType.NATURALPERSON);
+        Client cli1 = new Client(null, "Maria Silva", "helen.lissa@gmail.com", "36378912377", ClientType.NATURALPERSON, pe.encode("12345678"));
 
         cli1.getPhoneNumbers().addAll(Arrays.asList("27363323", "93838393"));
 
