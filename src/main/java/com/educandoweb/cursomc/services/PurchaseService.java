@@ -67,7 +67,8 @@ public class PurchaseService {
         }
         purchaseItemRepository.saveAll(obj.getItems());
         //System.out.println(obj);
-        emailService.sendOrderConfirmationEmail(obj);
+        //emailService.sendOrderConfirmationEmail(obj);
+        emailService.sendOrderConfirmationHtmlEmail(obj);
         return obj;
     }
 }
