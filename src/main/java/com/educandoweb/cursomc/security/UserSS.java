@@ -9,7 +9,8 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class UserSS implements UserDetails {
+public class UserSS implements UserDetails{
+    private static final long serialVersionUID = 1L;
 
     private Integer id;
     private String email;
@@ -63,5 +64,9 @@ public class UserSS implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public boolean hasRole(Profile profile){
+        return getAuthorities().contains(new SimpleGrantedAuthority(profile.getDescription()));
     }
 }
