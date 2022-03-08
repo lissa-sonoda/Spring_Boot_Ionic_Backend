@@ -24,6 +24,26 @@
 			"response": []
 		},
 		{
+			"name": "Get Category All - heroku",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://curso-spring-ionic-ti.herokuapp.com/categories",
+					"protocol": "https",
+					"host": [
+						"curso-spring-ionic-ti",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get Category 1",
 			"request": {
 				"method": "GET",
@@ -62,7 +82,7 @@
 			"response": []
 		},
 		{
-			"name": "Get Client",
+			"name": "Get Client 1",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -75,6 +95,25 @@
 					"path": [
 						"clients",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Client 2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/clients/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clients",
+						"2"
 					]
 				}
 			},
@@ -729,6 +768,33 @@
 					"path": [
 						"purchases",
 						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"email\": \"\",\r\n   \"password\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
 					]
 				}
 			},
