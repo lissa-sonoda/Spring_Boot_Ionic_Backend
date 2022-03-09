@@ -1,5 +1,6 @@
 package com.educandoweb.cursomc.services;
 
+import com.educandoweb.cursomc.domain.Client;
 import com.educandoweb.cursomc.domain.Purchase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -67,4 +68,20 @@ public abstract class AbstractEmailService implements EmailService {
         mmh.setText(htmlFromTemplatePedido(obj), true);
         return mimeMessage;
     }
+
+    public void sendNewPasswordEmail(Client client, String newPass){
+        SimpleMailMessage sm = prepareNewPasswordEmail(client, newPass);
+        sendEmail(sm);
+    }
+
+    protected SimpleMailMessage prepareNewPasswordEmail(Client client, String newPass) {
+        SimpleMailMessage sm = new SimpleMailMessage();
+        sm.setTo(client.getEmail());
+        sm.setFrom(sender);
+        sm.setSubject("Solicited New Password");
+        sm.setSentDate(new Date(System.currentTimeMillis()));
+        sm.setText("New Passord: " + newPass);
+        return sm;
+    }
+
 }

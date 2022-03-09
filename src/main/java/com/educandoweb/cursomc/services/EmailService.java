@@ -1,5 +1,6 @@
 package com.educandoweb.cursomc.services;
 
+import com.educandoweb.cursomc.domain.Client;
 import com.educandoweb.cursomc.domain.Purchase;
 import org.springframework.mail.SimpleMailMessage;
 
@@ -14,4 +15,6 @@ public interface EmailService {
     void sendOrderConfirmationHtmlEmail(Purchase obj);
 
     void sendHtmlEmail(MimeMessage msg);
+
+    void sendNewPasswordEmail(Client client, String newPass);
 }

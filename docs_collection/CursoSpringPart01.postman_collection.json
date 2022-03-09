@@ -104,7 +104,20 @@
 			"name": "Get Client 2",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
 				"url": {
 					"raw": "localhost:8080/clients/2",
 					"host": [
@@ -123,7 +136,18 @@
 			"name": "Get Purchase 1",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "localhost:8080/purchases/1",
 					"host": [
@@ -795,6 +819,59 @@
 					"port": "8080",
 					"path": [
 						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post - refreshToken",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJoZWxlbi5saXNzYUBnbWFpbC5jb20iLCJleHAiOjE2NDY4Mjk4MjV9.v6ZbbeK9wbjCaRtlNWcXiOpR90XulGA1TiqvESBKN0FRjxBvuz0jem3MsijH0_0w8-gM8TBZZHL54Q9nb113wQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/auth/refresh_token",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"refresh_token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post - forgot pass",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"helen@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/auth/forgot",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"forgot"
 					]
 				}
 			},
