@@ -4,10 +4,13 @@ import com.educandoweb.cursomc.domain.Address;
 import com.educandoweb.cursomc.domain.City;
 import com.educandoweb.cursomc.domain.Client;
 import com.educandoweb.cursomc.domain.enums.ClientType;
+import com.educandoweb.cursomc.domain.enums.Profile;
 import com.educandoweb.cursomc.dto.ClientDTO;
 import com.educandoweb.cursomc.dto.ClientNewDTO;
 import com.educandoweb.cursomc.repositories.AddressRepository;
 import com.educandoweb.cursomc.repositories.ClientRepository;
+import com.educandoweb.cursomc.security.UserSS;
+import com.educandoweb.cursomc.services.exceptions.AuthorizationException;
 import com.educandoweb.cursomc.services.exceptions.DataIntegrityException;
 import com.educandoweb.cursomc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +38,12 @@ public class ClientService {
     private AddressRepository addressRepository;
 
     public Client search(Integer id){
+
+        UserSS user = UserService.authenticated();
+        if (user == null || !user.hasRole(Profile.ADMIN) && !id.equals(user.getId())){
+            throw new AuthorizationException("Access Denied");
+        }
+
         Optional<Client> obj = repo.findById(id);
         return    obj.orElseThrow(() -> new ObjectNotFoundException(
                 "Object not found! Id: " + id + ", Type: " + Client.class.getName()));
