@@ -95,6 +95,18 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk</artifactId>
+			<version>LATEST</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>LATEST</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.apache.maven.plugins</groupId>
 			<artifactId>maven-assembly-plugin</artifactId>
 			<version>3.3.0</version>
