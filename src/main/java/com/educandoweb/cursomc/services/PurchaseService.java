@@ -1,5 +1,6 @@
 package com.educandoweb.cursomc.services;
 
+import com.educandoweb.cursomc.domain.Client;
 import com.educandoweb.cursomc.domain.PaymentWithBill;
 import com.educandoweb.cursomc.domain.Purchase;
 import com.educandoweb.cursomc.domain.PurchaseItem;
@@ -7,8 +8,13 @@ import com.educandoweb.cursomc.domain.enums.PaymentStatus;
 import com.educandoweb.cursomc.repositories.PaymentRepository;
 import com.educandoweb.cursomc.repositories.PurchaseItemRepository;
 import com.educandoweb.cursomc.repositories.PurchaseRepository;
+import com.educandoweb.cursomc.security.UserSS;
+import com.educandoweb.cursomc.services.exceptions.AuthorizationException;
 import com.educandoweb.cursomc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -70,5 +76,15 @@ public class PurchaseService {
         //emailService.sendOrderConfirmationEmail(obj);
         emailService.sendOrderConfirmationHtmlEmail(obj);
         return obj;
+    }
+
+    public Page<Purchase> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
+        UserSS user = UserService.authenticated();
+        if (user == null){
+            throw new AuthorizationException("Access Denied!");
+        }
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+        Client client = clientService.search(user.getId());
+        return repo.findByClient(client, pageRequest);
     }
 }
