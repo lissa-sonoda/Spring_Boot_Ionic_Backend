@@ -3,7 +3,6 @@ package com.educandoweb.cursomc.resources.exceptions;
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.model.AmazonS3Exception;
-import com.amazonaws.services.xray.model.Http;
 import com.educandoweb.cursomc.services.exceptions.AuthorizationException;
 import com.educandoweb.cursomc.services.exceptions.DataIntegrityException;
 import com.educandoweb.cursomc.services.exceptions.FileException;

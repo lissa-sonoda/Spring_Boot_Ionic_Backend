@@ -13,11 +13,13 @@ import com.educandoweb.cursomc.security.UserSS;
 import com.educandoweb.cursomc.services.exceptions.AuthorizationException;
 import com.educandoweb.cursomc.services.exceptions.DataIntegrityException;
 import com.educandoweb.cursomc.services.exceptions.ObjectNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,7 +52,7 @@ public class ClientService {
         }
 
         Optional<Client> obj = repo.findById(id);
-        return    obj.orElseThrow(() -> new ObjectNotFoundException(
+        return obj.orElseThrow(() -> new ObjectNotFoundException(
                 "Object not found! Id: " + id + ", Type: " + Client.class.getName()));
     }
 
@@ -113,6 +115,17 @@ public class ClientService {
     }
 
     public URI uploadProfilePicture(MultipartFile multipartFile){
-        return s3Service.uploadFile(multipartFile);
+
+        UserSS user = UserService.authenticated();
+        if (user == null){
+            throw new AuthorizationException("Access Denied");
+        }
+        URI uri = s3Service.uploadFile(multipartFile);
+
+        Client cli = search(user.getId());
+        cli.setImageURL(uri.toString());
+        repo.save(cli);
+
+        return uri;
     }
 }
