@@ -831,7 +831,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJoZWxlbi5saXNzYUBnbWFpbC5jb20iLCJleHAiOjE2NDY4Mjk4MjV9.v6ZbbeK9wbjCaRtlNWcXiOpR90XulGA1TiqvESBKN0FRjxBvuz0jem3MsijH0_0w8-gM8TBZZHL54Q9nb113wQ",
+						"value": "Bearer ",
 						"type": "text"
 					}
 				],
@@ -856,7 +856,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"helen@gmail.com\"\n}",
+					"raw": "{\n    \"email\": \"\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -872,6 +872,66 @@
 					"path": [
 						"auth",
 						"forgot"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Client - Picture",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/clients/picture",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clients",
+						"picture"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get - by Email",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJoZWxlbi5saXNzYUBnbWFpbC5jb20iLCJleHAiOjE2NDcwMjMwOTl9.L_b-fkNdnz_Puzch3byQIXvy-9A6SPw0s9qSGzhhY4PHyIWpX_CjlfOjjZtpE6N3OSd0-YYcYcrduqLsDo6SaA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/clients/email?value=x@gmail.com",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clients",
+						"email"
+					],
+					"query": [
+						{
+							"key": "value",
+							"value": "x@gmail.com"
+						}
 					]
 				}
 			},
