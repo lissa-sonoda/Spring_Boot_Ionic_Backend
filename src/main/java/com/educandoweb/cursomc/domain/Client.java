@@ -40,8 +40,6 @@ public class Client implements Serializable {
     @CollectionTable(name = "profiles")
     private Set<Integer> profiles = new HashSet<>();
 
-    private String imageURL;
-
     @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<Purchase> purchases = new ArrayList<>();
@@ -114,14 +112,6 @@ public class Client implements Serializable {
 
     public void addProfile(Profile profile) {
         profiles.add(profile.getCod());
-    }
-
-    public String getImageURL() {
-        return imageURL;
-    }
-
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
     }
 
     public List<Address> getAddresses() {

@@ -15,6 +15,7 @@ import com.educandoweb.cursomc.services.exceptions.DataIntegrityException;
 import com.educandoweb.cursomc.services.exceptions.ObjectNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,6 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.awt.image.BufferedImage;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -43,6 +45,12 @@ public class ClientService {
 
     @Autowired
     private S3Service s3Service;
+
+    @Autowired
+    private ImageService imageService;
+
+    @Value("${img.prefix.client.profile}")
+    private String prefix;
 
     public Client search(Integer id){
 
@@ -120,12 +128,10 @@ public class ClientService {
         if (user == null){
             throw new AuthorizationException("Access Denied");
         }
-        URI uri = s3Service.uploadFile(multipartFile);
 
-        Client cli = search(user.getId());
-        cli.setImageURL(uri.toString());
-        repo.save(cli);
+        BufferedImage jpgImage = imageService.getJpgImageFromFile(multipartFile);
+        String fileName = prefix + user.getId() + ".jpg";
 
-        return uri;
+        return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
     }
 }
