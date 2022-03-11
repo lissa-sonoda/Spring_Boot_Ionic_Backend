@@ -913,7 +913,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJoZWxlbi5saXNzYUBnbWFpbC5jb20iLCJleHAiOjE2NDcwMjMwOTl9.L_b-fkNdnz_Puzch3byQIXvy-9A6SPw0s9qSGzhhY4PHyIWpX_CjlfOjjZtpE6N3OSd0-YYcYcrduqLsDo6SaA",
+						"value": "",
 						"type": "text"
 					}
 				],
@@ -932,6 +932,44 @@
 							"key": "value",
 							"value": "x@gmail.com"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get State",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/states",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"states"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get City",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/states/2/cities",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"states",
+						"2",
+						"cities"
 					]
 				}
 			},
